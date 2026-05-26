@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal-overlay show">
+        <div class="modal-content">
+            <h2>Welcome to Reminder App</h2>
+            <p>Please enter a User ID to save & load your reminders.</p>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username"><i class="fas fa-user"></i> User ID</label>
+                    <input type="text" id="username" placeholder="e.g., john_doe" required>
+                </div>
+                <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Container (hidden by default) -->
+    <div id="appContainer" class="container">
+        <header>
+            <h1><i class="fas fa-bell"></i> Reminder App</h1>
+            <p>Stay organized with your personal reminders!</p>
+            <div id="userInfo"></div> <!-- For Welcome, User & Logout -->
+        </header>
+        <div class="form-card">
+            <h2>Add a New Reminder</h2>
+            <form id="reminderForm">
+                <div class="input-group">
+                    <label for="title"><i class="fas fa-tag"></i> Title</label>
+                    <input type="text" id="title" placeholder="e.g., Doctor's Appointment" required>
+                </div>
+                <div class="input-group">
+                    <label for="date"><i class="fas fa-calendar-alt"></i> Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="input-group">
+                    <label for="time"><i class="fas fa-clock"></i> Time</label>
+                    <input type="time" id="time" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="addBtn"><i class="fas fa-plus"></i> Add Reminder</button>
+                    <!-- NEW Main Voice Button -->
+                    <button type="button" id="mainVoiceBtn" class="voice-btn-main" title="Add Reminder by Voice"><i class="fas fa-microphone"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="reminders-section">
+            <h2><i class="fas fa-list"></i> Upcoming Reminders</h2>
+            <div id="reminderList" class="reminder-grid"></div>
+            <p id="noReminders" class="no-reminders">No reminders yet. Add one above!</p>
+        </div>
+    </div>
+
+    <!-- Conflict Modal (hidden by default) -->
+    <div id="conflictModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Time Conflict</h2>
+            <p id="conflictText">A reminder already exists at this time. What would you like to do?</p>
+            <div class="modal-actions">
+                <button id="conflictCancel" class="btn-secondary">Cancel</button>
+                <button id="conflictAddAnyway" class="btn-primary">Add Anyway</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- NEW: Add audio element to the DOM for reliability -->
+    <audio id="notificationSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3" preload="auto"></audio>
+</body>
+</html>
